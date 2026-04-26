@@ -1,9 +1,13 @@
 {
-  "ansible.executionEnvironment.enabled": true,
+  "ansible.executionEnvironment.enabled": false,
   "ansible.executionEnvironment.containerEngine": "podman",
   "ansible.executionEnvironment.pull.policy": "missing",
-  "ansible.executionEnvironment.image": "registry.redhat.io/ansible-automation-platform-22/ee-supported-rhel8:latest",
+  "ansible.executionEnvironment.image": "registry.redhat.io/ansible-automation-platform-24/ee-supported-rhel8:latest",
   "dev.containers.dockerPath": "podman",
   "remote.containers.dockerPath": "podman",
-  "remote.containers.forwardDisplayToLinux": false
+  "remote.containers.forwardDisplayToLinux": false,
+  "ansible.validation.enabled": true,
+  "ansible.validation.lint.path": "/home/devops/.local/bin/ansible-lint",
+  "ansible.python.interpreterPath": "/usr/bin/python3",
+  "ansible.ansible.path": "/home/devops/.local/bin/ansible"
 }

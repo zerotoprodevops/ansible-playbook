@@ -1,16 +1,29 @@
 ---
-- name: Install and configure Apache
-  hosts: webservers
-  become: yes
+- name: Install and start Apache HTTPD
+  hosts: web
+  become: true
 
   tasks:
-    - name: Install Apache package
-      ansible.builtin.package:
+    - name: Ensure httpd package is installed
+      ansible.builtin.dnf:
         name: httpd
         state: present
 
-    - name: Ensure Apache is running
+    - name: Correct index.html is present
+      ansible.builtin.copy:
+        src: files/index.html
+        dest: /var/www/html/index.html
+        mode: '0644'
+
+    - name: Ensure httpd server is enbaled
       ansible.builtin.service:
         name: httpd
         state: started
-        enabled: yes
+        enabled: true
+
+    - name: Configure firewall to allow http service
+      ansible.posix.firewalld:
+        service: http
+        permanent: true
+        immediate: true
+        state: enabled

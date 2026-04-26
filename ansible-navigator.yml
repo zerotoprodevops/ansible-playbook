@@ -1,10 +1,14 @@
 ansible-navigator:
   execution-environment:
     enabled: true
-    image: registry.redhat.io/ansible-automation-platform-22/ee-supported-rhel8:latest
+    image: registry.redhat.io/ansible-automation-platform-24/ee-supported-rhel8:latest
     pull:
       policy: missing
     container-engine: podman
   mode: stdout
   logging:
     level: warning
+
+  playbook-artifact:
+    enable: false
+    
