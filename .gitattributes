@@ -1,0 +1,7 @@
+# Force LF for all files
+* text=auto eol=lf
+
+# Explicitly for your files
+*.yml text eol=lf
+*.yaml text eol=lf
+*.log text eol=lf

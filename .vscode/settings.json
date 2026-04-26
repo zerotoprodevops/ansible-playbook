@@ -1,0 +1,9 @@
+{
+  "ansible.executionEnvironment.enabled": true,
+  "ansible.executionEnvironment.containerEngine": "podman",
+  "ansible.executionEnvironment.pull.policy": "missing",
+  "ansible.executionEnvironment.image": "registry.redhat.io/ansible-automation-platform-22/ee-supported-rhel8:latest",
+  "dev.containers.dockerPath": "podman",
+  "remote.containers.dockerPath": "podman",
+  "remote.containers.forwardDisplayToLinux": false
+}

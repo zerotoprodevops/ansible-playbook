@@ -1,0 +1,10 @@
+ansible-navigator:
+  execution-environment:
+    enabled: true
+    image: registry.redhat.io/ansible-automation-platform-22/ee-supported-rhel8:latest
+    pull:
+      policy: missing
+    container-engine: podman
+  mode: stdout
+  logging:
+    level: warning
