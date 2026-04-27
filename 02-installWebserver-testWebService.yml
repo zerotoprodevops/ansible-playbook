@@ -1,0 +1,56 @@
+---
+- name: enable Intranet service
+  hosts: web
+  become: true
+
+  tasks:
+    - name: Install httpd and firewll package
+      ansible.builtin.dnf:
+        name:
+          - httpd
+          - firewalld
+        state: present
+
+    - name: Test html page is placed
+      ansible.builtin.copy:
+        content: "Welcome to the example.com Intranet!\n"
+        dest: /var/www/html/index.html
+        mode: 0644 
+
+    - name: FIrewall enable and is running
+      ansible.builtin.service:
+        name: firewalld
+        enabled: true
+        state: started
+
+    - name: Firewall permit http serverice
+      ansible.posix.firewalld:
+        service: http
+        permanent: true
+        immediate: true
+        state: enabled
+
+    - name: Web server enabled and running
+      ansible.builtin.service:
+        name: httpd
+        enabled: true
+        state: started
+
+- name: Test Intranet Web server
+  hosts: web
+  become: false
+
+  tasks:
+    - name: test web page
+      ansible.builtin.uri:
+        url: http://192.168.56.101
+        return_content: true
+        status_code:
+          - 200
+      register: results
+
+    - name: Display the results
+      ansible.builtin.debug:
+        var: results
+
+
